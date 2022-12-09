@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard-container">
-    <el-card class="box-card">
+    <div>
       <div class="auth-header">
         <el-row :gutter="20">
           <el-col :span="1" style="text-align: left; margin-right: 1%">
@@ -112,7 +112,7 @@
         >
         </el-pagination>
       </div>
-    </el-card>
+    </div>
     <el-dialog
       :title="panelTitle"
       :visible.sync="dialogVisible"

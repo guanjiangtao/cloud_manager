@@ -3,10 +3,11 @@ package controller
 import (
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"project/get_manager/base"
 )
 
 // JobRouter 注册路由
-var JobRouter = map[string]*Router{
+var JobRouter = map[string]*base.Router{
 	"addJob": {
 		Func:   AddJob,
 		Type:   "GET",
@@ -20,7 +21,7 @@ var JobRouter = map[string]*Router{
 }
 
 func init() {
-	AddRouter(JobRouter)
+	base.AddRouter(JobRouter)
 }
 
 // AddJob 添加一个任务

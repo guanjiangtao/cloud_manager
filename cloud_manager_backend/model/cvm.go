@@ -19,6 +19,7 @@ func GetCvmByList(cvmDto *entity.CvmDTO) ([]*cvm.Instance, error) {
 		SecretKey: Auth.SecurityKey,
 		SecretId:  Auth.AccessKey,
 	}
+
 	return cvmTools.DescribeInstances(&entity.CvmRequest{
 		InstanceIds: cvmDto.InstanceIds,
 		Offset:      cvmDto.Offset,

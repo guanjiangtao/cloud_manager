@@ -1,7 +1,7 @@
 package main
 
 import (
-	routerManager "project/get_manager/controller"
+	routerManager "project/get_manager/base"
 )
 
 // main 管理入口

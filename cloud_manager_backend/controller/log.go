@@ -2,10 +2,11 @@ package controller
 
 import (
 	"github.com/gin-gonic/gin"
+	"project/get_manager/base"
 )
 
 // LogRouter 注册路由
-var LogRouter = map[string]*Router{
+var LogRouter = map[string]*base.Router{
 	"addLog": {
 		Func:   AddLog,
 		Type:   "POST",
@@ -14,7 +15,7 @@ var LogRouter = map[string]*Router{
 }
 
 func init() {
-	AddRouter(LogRouter)
+	base.AddRouter(LogRouter)
 }
 
 func AddLog(c *gin.Context) {
