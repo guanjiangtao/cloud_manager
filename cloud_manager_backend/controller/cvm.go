@@ -3,14 +3,13 @@ package controller
 import (
 	"github.com/gin-gonic/gin"
 	"net/http"
-	"project/get_manager/base"
 	"project/get_manager/entity"
 	"project/get_manager/model"
 	"strconv"
 )
 
 // CvmRouter 注册路由
-var CvmRouter = map[string]*base.Router{
+var CvmRouter = map[string]*Router{
 	"addCvm": {
 		Func:   addCvm,
 		Type:   "POST",
@@ -29,7 +28,7 @@ var CvmRouter = map[string]*base.Router{
 }
 
 func init() {
-	base.AddRouter(CvmRouter)
+	AddRouter(CvmRouter)
 }
 
 // addSecKey 添加AKSK

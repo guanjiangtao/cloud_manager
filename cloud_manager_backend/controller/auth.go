@@ -4,7 +4,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
-	route2 "project/get_manager/base"
 	"project/get_manager/entity"
 	"project/get_manager/model"
 	"strconv"
@@ -12,7 +11,7 @@ import (
 )
 
 // AuthRouter 注册路由
-var AuthRouter = map[string]*route2.Router{
+var AuthRouter = map[string]*Router{
 	"addAuth": {
 		Func:   addAuth,
 		Type:   "POST",
@@ -46,7 +45,7 @@ var AuthRouter = map[string]*route2.Router{
 }
 
 func init() {
-	route2.AddRouter(AuthRouter)
+	AddRouter(AuthRouter)
 }
 
 var logger = log.Logger{}
@@ -194,7 +193,7 @@ func getAuthById(c *gin.Context) {
 
 func getAllAuthAccount(c *gin.Context) {
 	accountList, err := model.GetAllAuthAccount()
-	respData, err := route2.PackageResponseParams(accountList, err)
+	respData, err := PackageResponseParams(accountList, err)
 	if err != nil {
 		logger.Printf("catch error %s", err)
 		c.JSON(http.StatusOK, gin.H{

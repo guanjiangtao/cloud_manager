@@ -3,14 +3,13 @@ package controller
 import (
 	"github.com/gin-gonic/gin"
 	"net/http"
-	"project/get_manager/base"
 	"project/get_manager/entity"
 	"project/get_manager/service"
 	"strconv"
 )
 
 // UserRouter 注册路由
-var UserRouter = map[string]*base.Router{
+var UserRouter = map[string]*Router{
 	"addUser": {
 		Func:   AddUser,
 		Type:   "POST",
@@ -34,7 +33,7 @@ var UserRouter = map[string]*base.Router{
 }
 
 func init() {
-	base.AddRouter(UserRouter)
+	AddRouter(UserRouter)
 }
 
 // AddUser 添加用户

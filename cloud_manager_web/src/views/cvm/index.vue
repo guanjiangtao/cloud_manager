@@ -19,46 +19,63 @@
       <el-table :data="cvmList" border stripe height="420px" max-height="420px" style="width: 100%">
         <el-table-column prop="InstanceName" label="实例名称" width="80">
         </el-table-column>
-        <el-table-column prop="InstanceId" label="实例ID" width="80">
+        <el-table-column prop="InstanceId" label="实例ID" width="110">
+          <template slot-scope="scope">
+            <div class="tbl-font-style instance-id-class">
+              {{ scope.row.InstanceId }}
+              <i class="el-icon-document-copy copy-tbl-icon" @click="doCopy(scope.row.InstanceId)"></i>
+            </div>
+          </template>
         </el-table-column>
         <el-table-column label="机器配置" width="140">
           <template slot-scope="scope">
-              <div class="tbl-font-style">
-                <div> CPU: {{ scope.row.CPU }}核 内存: {{ scope.row.Memory }}GB</div>
-            <div>磁盘: {{ scope.row.DataDisks[0].DiskSize }}GB</div>
-              </div>
+            <div class="tbl-font-style">
+              <div> CPU: {{ scope.row.CPU }}核 内存: {{ scope.row.Memory }}GB</div>
+              <div>磁盘: {{ scope.row.DataDisks[0].DiskSize }}GB</div>
+            </div>
           </template>
         </el-table-column>
         <el-table-column prop="OsName" label="系统名称" width="200">
         </el-table-column>
         <el-table-column label="网络地址" width="320">
           <template slot-scope="scope">
-            <div  class="tbl-font-style">
-              <div v-if="scope.row.IPv6Addresses.length > 0">IPV6: {{scope.row.IPv6Addresses[0]}} <i class="el-icon-document-copy tbl-icon"></i></div>
-            <div v-if="scope.row.PublicIpAddresses.length > 0">IPV4: {{scope.row.PublicIpAddresses[0]}} <i class="el-icon-document-copy tbl-icon"></i></div>
+            <div class="tbl-font-style">
+              <div id="ipv4" v-if="scope.row.PublicIpAddresses.length > 0">IPv4: {{ scope.row.PublicIpAddresses[0] }}(公)
+                <i class="el-icon-document-copy copy-tbl-icon" @click="doCopy(scope.row.PublicIpAddresses[0])"></i>
+              </div>
+              <div id="ipv6" v-if="scope.row.IPv6Addresses.length > 0">IPv6: {{ scope.row.IPv6Addresses[0] }}(公) <i
+                  class="el-icon-document-copy copy-tbl-icon" @click="doCopy(scope.row.IPv6Addresses[0])"></i></div>
             </div>
           </template>
         </el-table-column>
-        <el-table-column prop="createTime" label="创建时间">
+        <el-table-column label="创建时间" width="150" :show-overflow-tooltip="true">
           <template slot-scope="scope">
-            <div>{{
+            <div class="tbl-font-style">{{
                 formatTime(scope.row.createTime)
             }}</div>
           </template>
         </el-table-column>
         <el-table-column label="过期时间">
           <template slot-scope="scope">
-            <div>{{
+            <div class="tbl-font-style" :class="renderClass(scope.row.ExpiredTime)">{{
                 formatTime(scope.row.ExpiredTime)
             }}</div>
           </template>
         </el-table-column>
         <el-table-column fixed="right" label="操作" width="200" align="center">
           <template slot-scope="scope">
-            <el-button @click="handle(scope.$index, scope.row, 1)" type="text">编辑
-            </el-button>
-            <el-button type="text" style="color: red" @click="handle(scope.$index, scope.row, 2)">删除
-            </el-button>
+            <el-dropdown>
+            <span class="el-dropdown-link">
+              执行操作<i class="el-icon-arrow-down el-icon--right"></i>
+            </span>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item @click="handle(scope.$index, scope.row, 1)">开机</el-dropdown-item>
+              <el-dropdown-item>关机</el-dropdown-item>
+              <el-dropdown-item>重启</el-dropdown-item>
+              <el-dropdown-item disabled>销毁</el-dropdown-item>
+              <el-dropdown-item divided>扩容</el-dropdown-item>
+            </el-dropdown-menu>
+            </el-dropdown>
           </template>
         </el-table-column>
       </el-table>
@@ -68,7 +85,8 @@
 
 <script>
 import { getCvmByList } from '@/api/cvm'
-import { formatTime } from '@/utils/time'
+import { formatTime, expiredTime } from '@/utils/time'
+import { addCopyEventListener, addCopyText } from '@/utils/copy-paste'
 
 export default {
   name: 'index',
@@ -99,6 +117,7 @@ export default {
   },
   created() {
     this.getCvmByList()
+    addCopyEventListener()
   },
   methods: {
     getCvmByList() {
@@ -113,11 +132,20 @@ export default {
       })
     },
     formatTime,
+    expiredTime,
     handle(index, row, type) {
 
     },
-    getAllAuthAccount() {
-
+    renderClass(time) {
+      return expiredTime(time) ? 'time-danger' : 'time-normal'
+    },
+    doCopy(txt) {
+      addCopyText(txt)
+      document.execCommand("Copy")
+      this.$notify.info({
+        title: '通知',
+        message: '复制成功'
+      });
     },
   }
 }
@@ -127,10 +155,29 @@ export default {
 .cvm-header {
   line-height: 70px;
 }
+
 .tbl-font-style {
   font-size: 12px;
 }
-.tbl-icon {
+
+.copy-tbl-icon {
   cursor: pointer;
+}
+
+.el-dropdown-link {
+  cursor: pointer;
+  color: #409EFF;
+}
+
+.el-icon-arrow-down {
+  font-size: 12px;
+}
+
+.time-normal {
+
+}
+
+.time-danger {
+  color: red;
 }
 </style>

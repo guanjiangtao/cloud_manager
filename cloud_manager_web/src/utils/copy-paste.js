@@ -1,5 +1,13 @@
 
+let copyText = '';
 
+export function addCopyText(text) {
+    copyText = text;
+}
 
-
-function RegisterCopyEvent()
+export function addCopyEventListener() {
+    document.addEventListener('copy', (e) => {
+        e.clipboardData.setData('text/plain', copyText)
+        e.preventDefault()
+    });
+}
