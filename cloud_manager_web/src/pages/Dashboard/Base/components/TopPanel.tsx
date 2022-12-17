@@ -34,22 +34,22 @@ const PieChartIcon = memo(() => (
 
 const PANE_LIST: Array<IBoardProps> = [
   {
-    title: '总收入',
+    title: '账号余额',
     count: '¥ 28,425.00',
     trend: ETrend.up,
     trendNum: '20.5%',
     Icon: <PieChartIcon />,
   },
   {
-    title: '总退款',
+    title: '总花费',
     count: '¥ 768.00',
     trend: ETrend.down,
     trendNum: '20.5%',
     Icon: <BarChartIcon />,
   },
   {
-    title: '活跃用户（个）',
-    count: '1126',
+    title: '活跃账户（个）',
+    count: '4',
     trend: ETrend.down,
     trendNum: '20.5%',
     Icon: (
@@ -59,7 +59,7 @@ const PANE_LIST: Array<IBoardProps> = [
     ),
   },
   {
-    title: '产生订单（个）',
+    title: '目前在线服务器数量',
     count: '527',
     trend: ETrend.down,
     trendNum: '20.5%',

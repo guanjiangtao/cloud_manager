@@ -201,3 +201,40 @@ export const getScatterChartOptions = (dateTime: Array<string> = []): EChartOpti
     ],
   };
 };
+
+// cvm分地区展示图
+export const cvmRegionOptions: EChartOption = {
+  title: {
+    text: '分地区概览',
+    textStyle: {
+      fontSize: 14,
+      color: '#617be3'
+   }
+  },
+  xAxis: {
+    data: ['北京', '上海', '广州', '南京', '香港', '美国']
+  },
+  yAxis: {},
+  series: [
+    {
+      type: 'bar',
+      data: [2, 4, 1, 5, 7, 8],
+      name: '业务服务'
+    },
+    {
+      type: 'bar',
+      data: [3, 5, 1, 2, 3, 4],
+      name: '平台基础服务'
+    },
+    {
+      type: 'bar',
+      data: [23, 24, 18, 25, 27, 28],
+      name: '核心网络'
+    },
+    {
+      type: 'bar',
+      data: [23, 24, 18, 25, 27, 28],
+      name: '备用账号'
+    }
+  ]
+};

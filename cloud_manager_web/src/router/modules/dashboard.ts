@@ -21,7 +21,7 @@ const dashboard: IRouter[] = [
         path: 'detail',
         Component: lazy(() => import('pages/Dashboard/Detail')),
         meta: {
-          title: '统计报表',
+          title: '主机资源仪表盘',
         },
       },
     ],

@@ -28,40 +28,21 @@ const SALE_COLUMNS: TdPrimaryTableProps['columns'] = [
     align: 'left',
     ellipsis: true,
     colKey: 'productName',
-    title: '客户名称',
+    title: '账户名称',
     width: 200,
   },
   {
     align: 'center',
-    colKey: 'growUp',
-    width: 100,
-    title: '较上周',
-    cell: ({ row }) => <TrendIcon trend={row.growUp < 0 ? ETrend.down : ETrend.up} trendNum={Math.abs(row.growUp)} />,
-  },
-  {
-    align: 'center',
     colKey: 'count',
-    title: '订单量',
+    title: '消费金额',
     width: 100,
   },
   {
     align: 'center',
     colKey: 'date',
     width: 140,
-    title: '合同签订日期',
-  },
-  {
-    align: 'center',
-    colKey: 'operation',
-    fixed: 'right',
-    title: '操作',
-    width: 80,
-    cell: ({ row }) => (
-      <Button variant='text' theme='primary' onClick={() => console.log(row)}>
-        操作
-      </Button>
-    ),
-  },
+    title: '数据统计日期',
+  }
 ];
 
 const PURCHASE_COLUMNS: TdPrimaryTableProps['columns'] = [
@@ -79,51 +60,32 @@ const PURCHASE_COLUMNS: TdPrimaryTableProps['columns'] = [
     align: 'left',
     ellipsis: true,
     colKey: 'productName',
-    title: '供应商名称',
+    title: '产品名称',
     width: 200,
   },
   {
     align: 'center',
-    colKey: 'growUp',
-    width: 100,
-    title: '较上周',
-    cell: ({ row }) => <TrendIcon trend={row.growUp < 0 ? ETrend.down : ETrend.up} trendNum={Math.abs(row.growUp)} />,
-  },
-  {
-    align: 'center',
     colKey: 'count',
-    title: '订单量',
+    title: '购买数量',
     width: 100,
   },
   {
     align: 'center',
-    colKey: 'date',
+    colKey: 'price',
     width: 140,
-    title: '合同签订日期',
-  },
-  {
-    align: 'center',
-    colKey: 'operation',
-    title: '操作',
-    fixed: 'right',
-    width: 80,
-    cell: ({ row }) => (
-      <Button variant='text' theme='primary' onClick={() => console.log(row)}>
-        操作
-      </Button>
-    ),
-  },
+    title: '总价格',
+  }
 ];
 
 const RankList = () => (
   <Row gutter={[16, 16]} className={Style.rankListPanel}>
     <Col xs={12} xl={6} span={12}>
-      <Card title='销售订单排名' actions={DateRadioGroup}>
+      <Card title='账户余额排名' actions={DateRadioGroup}>
         <Table columns={SALE_COLUMNS} rowKey='productName' size='medium' data={SALE_TREND_LIST} />
       </Card>
     </Col>
     <Col xs={12} xl={6} span={12}>
-      <Card title='采购订单排名' actions={DateRadioGroup}>
+      <Card title='产品花费排名' actions={DateRadioGroup}>
         <Table columns={PURCHASE_COLUMNS} rowKey='productName' size='medium' data={PURCHASE_TREND_LIST} />
       </Card>
     </Col>
