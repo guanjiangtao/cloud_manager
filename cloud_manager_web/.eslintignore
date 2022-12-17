@@ -1,5 +1,5 @@
-build/*.js
-src/assets
+build
+mock
+config
 public
-dist
-/src/
+scripts
