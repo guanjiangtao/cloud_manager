@@ -25,9 +25,6 @@ export default memo(() => {
     window.open('https://tdesign.tencent.com/react/overview');
   };
 
-  const gotoGitHub = () => {
-    window.open('https://github.com/Tencent/tdesign-react-starter');
-  };
 
   const clickHandler = (data: any) => {
     if (data.value === 1) {
@@ -41,19 +38,6 @@ export default memo(() => {
 
   return (
     <Space align='center'>
-      <Badge className={Style.badge} count={6} dot={false} maxCount={99} shape='circle' showZero={false} size='medium'>
-        <Button className={Style.menuIcon} shape='square' size='large' variant='text' icon={<MailIcon />} />
-      </Badge>
-      <Popup content='代码仓库' placement='bottom' showArrow destroyOnClose>
-        <Button
-          className={Style.menuIcon}
-          shape='square'
-          size='large'
-          variant='text'
-          onClick={gotoGitHub}
-          icon={<LogoGithubIcon />}
-        />
-      </Popup>
       <Popup content='帮助文档' placement='bottom' showArrow destroyOnClose>
         <Button
           className={Style.menuIcon}
