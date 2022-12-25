@@ -16,8 +16,7 @@ export interface SelectorProps {
     onChange: (value: SelectValue) => void
 }
 
-
-
+// select筛选组件
 const Selector: React.FC<SelectorProps> = (props: SelectorProps) => {
     const { selectors } = props;
     return (

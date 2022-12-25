@@ -1,5 +1,5 @@
 import { lazy } from 'react';
-import { DashboardIcon } from 'tdesign-icons-react';
+import { ServerIcon } from 'tdesign-icons-react';
 import { IRouter } from '../index';
 
 const cvm: IRouter[] = [
@@ -7,7 +7,7 @@ const cvm: IRouter[] = [
     path: '/cvm',
     meta: {
       title: '机器管理',
-      Icon: DashboardIcon,
+      Icon: ServerIcon,
     },
     children: [
       {
@@ -19,7 +19,7 @@ const cvm: IRouter[] = [
       },
       {
         path: 'apply',
-        Component: lazy(() => import('pages/Cvm/List')),
+        Component: lazy(() => import('pages/Cvm/Apply')),
         meta: {
           title: '申请机器',
         },
